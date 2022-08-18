@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:search_weather/bloc/bloc.dart';
+import 'package:search_weather/cubic/weather_cubit.dart';
 import 'package:search_weather/data/models/weather.dart';
 import 'package:search_weather/pages/weather_detail_page.dart';
 
@@ -22,7 +23,7 @@ class WeatherSearchPage extends StatelessWidget {
               Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
             }
           },
-          child: BlocBuilder<WeatherBloc, WeatherState>(
+          child: BlocBuilder<WeatherBloc/* WeatherCubit */, WeatherState>(
             builder: (context, state) {
               if (state is WeatherInitial) {
                 return buildIntialInput();
@@ -91,6 +92,13 @@ class CityInputField extends StatelessWidget {
   void submitCity(BuildContext context, String cityName) {
     final weatherBloc  = BlocProvider.of<WeatherBloc>(context);
     weatherBloc.add(GetWeather(cityName));
+
+    // Alternative cubit method
+    /*
+    final weatherCubit = BlocProvider.of<WeatherCubit>(context);
+
+    weatherCubit.getWeather(cityName);
+    */
   }
 
   @override

@@ -15,7 +15,7 @@ class WeatherCubit extends Cubit<WeatherState> {
       final weather = await weatherRepository.fetchWeather(cityName);
       emit(WeatherLoaded(weather));
     }on NetworkError{
-      emit(WeatherError(""));
+      emit(WeatherError("could not get weather may be it is connection "));
     }
   }
 

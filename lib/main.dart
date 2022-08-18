@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider(
-        builder: (context) =>WeatherBloc(FakeWeatherRepository()),
+        create: (context) =>WeatherBloc(FakeWeatherRepository()),//WeatherCubit(FakeWeatherRepository()),
         child: WeatherSearchPage(),
       ),
     );
